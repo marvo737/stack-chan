@@ -1,5 +1,6 @@
 import { fetch } from 'fetch'
 import Headers from 'headers'
+import Base64 from 'base64'
 import type { Maybe } from 'stackchan-util'
 
 const API_URL = 'https://speech.googleapis.com/v1/speech:recognize'
@@ -23,7 +24,7 @@ export default class GoogleSTT {
 
   async transcribe(buffer: ArrayBuffer | HostBuffer): Promise<Maybe<string>> {
     try {
-      const base64Audio = this.#encodeBase64(buffer)
+      const base64Audio = Base64.encode(buffer)
       const body = {
         config: {
           encoding: 'LINEAR16',
@@ -54,22 +55,5 @@ export default class GoogleSTT {
     } catch (error) {
       return { success: false, reason: `Exception occurred: ${error.message}` }
     }
-  }
-
-  #encodeBase64(buffer: ArrayBuffer | HostBuffer): string {
-    const bytes = new Uint8Array(buffer)
-    const lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-    let result = ''
-    const len = bytes.length
-    for (let i = 0; i < len; i += 3) {
-      const b0 = bytes[i]
-      const b1 = i + 1 < len ? bytes[i + 1] : 0
-      const b2 = i + 2 < len ? bytes[i + 2] : 0
-      result += lookup[b0 >> 2]
-      result += lookup[((b0 & 3) << 4) | (b1 >> 4)]
-      result += i + 1 < len ? lookup[((b1 & 0x0f) << 2) | (b2 >> 6)] : '='
-      result += i + 2 < len ? lookup[b2 & 0x3f] : '='
-    }
-    return result
   }
 }

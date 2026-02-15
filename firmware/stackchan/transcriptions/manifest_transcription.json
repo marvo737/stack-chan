@@ -1,6 +1,7 @@
 {
   "include": [
     "$(MODDABLE)/modules/base/uuid/manifest.json",
+    "$(MODDABLE)/modules/data/base64/manifest.json",
     "$(MODDABLE)/modules/data/headers/manifest.json",
     "$(MODDABLE)/examples/io/tcp/fetch/manifest_fetch.json"
   ],
