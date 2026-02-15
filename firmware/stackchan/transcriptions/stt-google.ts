@@ -24,7 +24,9 @@ export default class GoogleSTT {
 
   async transcribe(buffer: ArrayBuffer | HostBuffer): Promise<Maybe<string>> {
     try {
+      trace(`buffer size: ${buffer.byteLength} bytes\n`)
       const base64Audio = Base64.encode(buffer)
+      trace(`base64 encoded: ${base64Audio.length} chars\n`)
       const body = {
         config: {
           encoding: 'LINEAR16',
@@ -36,11 +38,13 @@ export default class GoogleSTT {
         },
       }
 
+      trace('sending request to Google STT...\n')
       const response = await fetch(`${API_URL}?key=${this.#apiKey}`, {
         method: 'POST',
         headers: new Headers([['Content-Type', 'application/json']]),
         body: JSON.stringify(body),
       })
+      trace(`response status: ${response.status}\n`)
 
       if (response.status !== 200) {
         return { success: false, reason: `request error: ${response.status}(${response.statusText})` }
