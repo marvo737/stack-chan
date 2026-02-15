@@ -1,5 +1,5 @@
 import { ChatCompletionsDialogue } from 'dialogue-openai-compat'
-import GoogleSTT from 'stt-google'
+import Whisper from 'stt-whisper'
 import { TTS } from 'tts-voicevox'
 import loadPreferences from 'loadPreference'
 import { createHeartDecorator, createSweatDecorator } from 'decorator'
@@ -18,9 +18,9 @@ export function onRobotCreated(robot) {
     model: aiPrefs.openclaw_model,
   })
 
-  // Initialize Google STT
-  const stt = new GoogleSTT({
-    apiKey: aiPrefs.google_stt_key,
+  // Initialize Whisper STT
+  const stt = new Whisper({
+    apiKey: aiPrefs.token,
   })
 
   // Initialize VOICEVOX TTS
@@ -29,7 +29,7 @@ export function onRobotCreated(robot) {
       host: ttsPrefs.host,
       port: ttsPrefs.port ?? 50021,
       sampleRate: ttsPrefs.sampleRate ?? 24000,
-    })
+    }),
   )
 
   let talking = false
@@ -67,7 +67,7 @@ export function onRobotCreated(robot) {
     await robot.tone(600, 100)
     trace('end recording.\n')
 
-    // Transcription phase (Google STT)
+    // Transcription phase (Whisper)
     trace('start transcription.\n')
     result = await stt.transcribe(buffer)
     if (!result.success) {
