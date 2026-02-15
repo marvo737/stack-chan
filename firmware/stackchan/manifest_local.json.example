@@ -14,6 +14,12 @@
             "type": "pwm",
             "pwmPan": 33,
             "pwmTilt": 32
+        },
+        "ai": {
+            "openclaw_url": "http://YOUR_OPENCLAW_HOST:PORT/v1/chat/completions",
+            "openclaw_key": "YOUR_OPENCLAW_API_KEY",
+            "openclaw_model": "YOUR_MODEL_NAME",
+            "google_stt_key": "YOUR_GOOGLE_STT_API_KEY"
         }
     }
 }
