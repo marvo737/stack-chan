@@ -7,7 +7,7 @@
   "modules": {
     "*": ["./*"]
   },
-  "preload": ["stt-whisper"],
+  "preload": ["stt-whisper", "stt-google"],
   "data": {
     "*": ["$(MODULES)/crypt/data/ca236"]
   }
