@@ -31,3 +31,5 @@ fp-info-cache
 # Gerber archive
 *.zip
 
+.claude
+docs/plans
