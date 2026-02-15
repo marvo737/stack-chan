@@ -1,0 +1,19 @@
+{
+    "include": [
+        "./manifest.json"
+    ],
+    "config": {
+        "ssid": "YOUR_WIFI_SSID",
+        "password": "YOUR_WIFI_PASSWORD",
+        "tts": {
+            "type": "voicevox",
+            "host": "192.168.x.x",
+            "port": 50021
+        },
+        "driver": {
+            "type": "pwm",
+            "pwmPan": 33,
+            "pwmTilt": 32
+        }
+    }
+}

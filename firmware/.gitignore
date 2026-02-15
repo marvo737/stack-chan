@@ -5,5 +5,8 @@
 /dist/
 /dist-tests/
 
+# Local config (contains credentials)
+/stackchan/manifest_local.json
+
 # Bundle file
 /stackchan/tech.moddable.stackchan*
